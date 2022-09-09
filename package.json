@@ -1,0 +1,22 @@
+{
+  "dependencies": {
+    "@google-cloud/local-auth": "^2.1.0"
+  },
+  "name": "fantasy-trader",
+  "description": "A webapp for easy use of the reddit adjusted trade values sheet",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/connellyguy/fantasy-trader.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/connellyguy/fantasy-trader/issues"
+  },
+  "homepage": "https://github.com/connellyguy/fantasy-trader#readme"
+}
