@@ -1,6 +1,6 @@
 import { Routes, Route } from 'react-router-dom';
-import { DndProvider } from 'react-dnd-multi-backend';
-import { HTML5toTouch } from 'rdndmb-html5-to-touch';
+import { DndProvider } from 'react-dnd';
+import { HTML5Backend } from 'react-dnd-html5-backend';
 
 import Layout from './components/layout/Layout';
 
@@ -9,7 +9,7 @@ import React from 'react';
 
 function App() {
     return (
-        <DndProvider options={HTML5toTouch}>
+        <DndProvider backend={HTML5Backend}>
             <Layout>
                 <Routes>
                     <Route path="/" element={<TradeBuilderPage />} />

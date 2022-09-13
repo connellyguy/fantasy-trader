@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { get } from 'lodash';
-import PlayerSourceBox from 'components/layout/PlayerSourceBox';
+import PlayerSourceBox from 'components/trade-builder/PlayerSourceBox';
 import classes from './TradeBuilder.module.scss';
 import PlayerCardContainer from 'components/ui/playerCards/PlayerCardContainer';
 import Card from 'components/ui/Card';
+import TradeBoxes from 'components/trade-builder/TradeBoxes';
 
 function TradeBuilderPage() {
     const [playerMap, setPlayerMap] = useState({});
@@ -26,19 +27,10 @@ function TradeBuilderPage() {
     }, []);
 
     return (
-        <React.Fragment>
-            <section className={classes.section}>
-                <PlayerSourceBox players={playerList} />
-                <div className={classes.tradeBoxes}>
-                    <Card>
-                        <PlayerCardContainer width="30rem" players={[]} />
-                    </Card>
-                    <Card>
-                        <PlayerCardContainer width="30rem" players={[]} />
-                    </Card>
-                </div>
-            </section>
-        </React.Fragment>
+        <section className={classes.section}>
+            <PlayerSourceBox players={playerList} />
+            <TradeBoxes />
+        </section>
     );
 }
 
