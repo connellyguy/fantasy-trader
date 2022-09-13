@@ -8,6 +8,5 @@ router.get('/', (req, res) => {
 });
 
 router.get('/players', readPlayers);
-router.post('/players', readPlayers);
 
 module.exports = router;

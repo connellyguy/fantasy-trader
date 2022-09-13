@@ -1,5 +1,29 @@
 $theme-white: #f2f4f3;
 $theme-brown: #ECD7C3;
-$theme-green: #426A5A;
+$theme-linen: #F0E6DD;
+$theme-green: #B1CCC2;
 $theme-red: #6B0504;
 $theme-orange: #A3320B;
+$theme-grey: #4e4e4e;
+$theme-menu: $theme-grey;
+
+
+$position-colors: (
+    'rb': #D03223,
+    'wr': #084689,
+    'qb': #3E8914,
+    'te': #17BEBB,
+);
+
+.grabbable {
+    cursor: move;
+    cursor: grab;
+    cursor: -moz-grab;
+    cursor: -webkit-grab;
+}
+
+.grabbable:active {
+    cursor: grabbing;
+    cursor: -moz-grabbing;
+    cursor: -webkit-grabbing;
+}

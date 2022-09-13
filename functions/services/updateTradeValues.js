@@ -22,8 +22,8 @@ async function getTradeValues(auth) {
     const positionByColumn = {
         2: 'RB',
         4: 'WR',
-        6: 'QB',
-        8: 'TE',
+        6: 'TE',
+        8: 'QB',
     };
 
     const rowPromises = rows.map(async (row) => {
@@ -71,20 +71,9 @@ async function updateTradeValues() {
     await updateTable('positions', tradeValues.positions);
 }
 
-function handler(req, res) {
-    res.set('Access-Control-Allow-Origin', '*');
-    res.set('Access-Control-Allow-Methods', 'GET, POST');
-
+function handler() {
     updateTradeValues().catch((error) => {
         console.error(error);
-
-        res.status(404).json({
-            msg: 'Update failed',
-        });
-    });
-
-    res.status(200).json({
-        msg: 'Successful update',
     });
 }
 
