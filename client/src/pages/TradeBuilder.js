@@ -7,6 +7,7 @@ import TradeBoxes from 'components/trade-builder/TradeBoxes';
 
 function TradeBuilderPage() {
     const [playerMap, setPlayerMap] = useState({});
+    const [loadingPlayers, setLoadingPlayers] = useState(true);
     const playerList = Object.values(playerMap);
 
     console.log('playerMap: ', playerMap);
@@ -20,13 +21,17 @@ function TradeBuilderPage() {
         })
             .then((resp) => {
                 setPlayerMap(get(resp, 'data', {}));
+                setLoadingPlayers(false);
             })
-            .catch(console.error);
+            .catch((err) => {
+                console.error(err);
+                setLoadingPlayers(false);
+            });
     }, []);
 
     return (
         <section className={classes.section}>
-            <PlayerSourceBox players={playerList} />
+            <PlayerSourceBox players={playerList} loadingPlayers={loadingPlayers} />
             <TradeBoxes fullPlayerMap={playerMap} />
         </section>
     );
