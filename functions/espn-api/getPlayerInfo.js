@@ -17,7 +17,7 @@ async function getPlayerInfo(name) {
     const player = data.items[0];
 
     return {
-        uuid: player.uuid,
+        id: player.id,
         displayName: player.displayName,
         shortName: player.shortName,
         jersey: player.jersey,

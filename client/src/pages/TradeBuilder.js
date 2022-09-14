@@ -3,8 +3,6 @@ import axios from 'axios';
 import { get } from 'lodash';
 import PlayerSourceBox from 'components/trade-builder/PlayerSourceBox';
 import classes from './TradeBuilder.module.scss';
-import PlayerCardContainer from 'components/ui/playerCards/PlayerCardContainer';
-import Card from 'components/ui/Card';
 import TradeBoxes from 'components/trade-builder/TradeBoxes';
 
 function TradeBuilderPage() {
@@ -29,7 +27,7 @@ function TradeBuilderPage() {
     return (
         <section className={classes.section}>
             <PlayerSourceBox players={playerList} />
-            <TradeBoxes />
+            <TradeBoxes fullPlayerMap={playerMap} />
         </section>
     );
 }

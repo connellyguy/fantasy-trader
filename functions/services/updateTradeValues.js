@@ -39,12 +39,12 @@ async function getTradeValues(auth) {
                     const position = positionByColumn[column];
 
                     tiers[tier] = tiers[tier] || [];
-                    tiers[tier].push(playerInfo.uuid);
+                    tiers[tier].push(playerInfo.id);
 
                     positions[position] = positions[position] || [];
-                    positions[position].push(playerInfo.uuid);
+                    positions[position].push(playerInfo.id);
 
-                    players[playerInfo.uuid] = {
+                    players[playerInfo.id] = {
                         name,
                         position: positionByColumn[column],
                         tier: row[0],
@@ -77,7 +77,25 @@ function handler() {
     });
 }
 
+async function httpHandler(req, res) {
+    res.set('Access-Control-Allow-Origin', '*');
+    res.set('Access-Control-Allow-Methods', 'GET');
+
+    updateTradeValues()
+        .then(() => {
+            res.status(200).json({ msg: 'Update successful' });
+        })
+        .catch((error) => {
+            console.error(error);
+
+            res.status(500).json({
+                msg: 'Error',
+            });
+        });
+}
+
 module.exports = {
     updateTradeValues,
     handler,
+    httpHandler,
 };

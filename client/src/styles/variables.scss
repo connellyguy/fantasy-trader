@@ -1,3 +1,5 @@
+// COLORS
+
 $theme-white: #f2f4f3;
 $theme-brown: #ECD7C3;
 $theme-linen: #F0E6DD;
@@ -5,6 +7,8 @@ $theme-green: #B1CCC2;
 $theme-red: #6B0504;
 $theme-orange: #A3320B;
 $theme-grey: #4e4e4e;
+$theme-olive: #41693c;
+$theme-purple: #5e2c8d;
 $theme-menu: $theme-grey;
 
 
@@ -27,3 +31,7 @@ $position-colors: (
     cursor: -moz-grabbing;
     cursor: -webkit-grabbing;
 }
+
+// VALUES
+
+$mobile-break-point: 720px;
