@@ -1,0 +1,55 @@
+@import 'styles/variables.scss';
+.searchContainer {
+    position: relative;
+}
+
+.searchIcon {
+    color: rgb(141, 141, 141);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 1.25rem;
+    position: absolute;
+    height: 100%;
+    left: 0;
+}
+
+.search {
+    border: 1px solid #ccc;
+    border-radius: .5rem;
+    font-size: 1.8rem;
+    margin: .5rem;
+    padding: 1rem .5rem;
+    padding-left: 3.5rem;
+
+    &::-webkit-search-cancel-button {
+        cursor: pointer;
+        -webkit-appearance: none;
+        height: 1em;
+        width: 1em;
+        border-radius: 50em;
+        background: url(https://pro.fontawesome.com/releases/v5.10.0/svgs/solid/times-circle.svg) no-repeat 50% 50%;
+        background-size: contain;
+        opacity: 0;
+        pointer-events: none;
+        position: absolute;
+        right: -1rem;
+        transition: .2s;
+    }
+      
+    &:focus::-webkit-search-cancel-button, &:hover::-webkit-search-cancel-button {
+        opacity: .3;
+        pointer-events: all;
+        right: .5rem;
+    }
+}
+
+//mobile
+@media screen and (max-width: calc(#{$mobile-break-point} - 1px)) {
+    .searchIcon {
+        display: none;
+    }
+    .search {
+        padding-left: .5rem;
+    }
+}

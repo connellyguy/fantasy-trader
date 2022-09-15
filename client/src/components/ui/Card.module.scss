@@ -1,0 +1,26 @@
+.card {
+    background-color: white;
+    border-radius: 1rem;
+    box-shadow: 0 .3rem 1rem rgba(0, 0, 0, 0.2);
+    margin: 1rem;
+}
+
+.header {
+    border-bottom: 1px solid #ccc;
+    position: relative;
+    display: flex;
+    margin: 2rem;
+    margin-bottom: 0;
+    max-width: 100%;
+    padding-bottom: 1rem;
+    justify-content: flex-start;
+}
+
+.body {
+    position: relative;
+    display: flex;
+    margin-top: 0;
+    max-width: 100%;
+    padding: 1rem;
+    justify-content: center;
+}

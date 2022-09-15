@@ -1,0 +1,19 @@
+@import 'styles/variables.scss';
+
+.label {
+    color: $theme-purple;
+    font-size: 2rem;
+    font-weight: 600;
+    margin: 1px 0;
+    min-height: unset;
+}
+
+.input {
+    font-size: 2rem;
+    max-width: 95%;
+    margin: 0;
+}
+
+.underline {
+    border-bottom: 2px dashed $theme-purple;
+}

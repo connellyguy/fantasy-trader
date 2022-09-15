@@ -1,0 +1,44 @@
+@import 'styles/variables.scss';
+
+.button {
+    background-color: unset;
+    cursor: pointer;
+    font-weight: 400;
+    border-radius: .5rem;
+    font-size: 2rem;
+    margin: .5rem;
+    padding: .5rem 1.5rem;
+    box-shadow: rgba(0, 0, 0, 0.2) 0 .3rem .7rem, rgba(0, 0, 0, 0.1) 0 .3rem .3rem;
+
+    &:hover {
+        border-color: lightslategray;
+        color: lightslategray;
+    
+        &.solid {
+            background-color: lightgray;
+            border-color: lightgray;
+            color: #2c2c2c;
+        }
+    }
+
+    &:active {
+        box-shadow: rgba(0, 0, 0, 0.2) 0 .1rem .2rem, rgba(0, 0, 0, 0.2) 0 .1rem .1rem;
+    }
+}
+
+$types: (
+    "menu": $theme-menu
+);
+
+$button-types: map-merge($types, $position-colors);
+
+@each $type, $color in $button-types {
+    .#{$type} {
+        border: 1px solid $color;
+        color: $color; 
+        &.solid {
+            background-color: $color;
+            color: white;
+        }
+    }
+}

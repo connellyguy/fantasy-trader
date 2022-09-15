@@ -1,0 +1,60 @@
+.containerWrapper {
+    position: relative;
+    margin: 1rem;
+}
+
+.container {
+    align-content: flex-start;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 1rem;
+    box-shadow: rgba(50, 50, 93, 0.25) 0 2rem 4rem -.5rem inset, rgba(0, 0, 0, 0.3) 0 1rem 2rem -1rem inset;
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    height: calc(100% - 2rem);
+    width: calc(100% - 2rem);
+    overflow: auto;
+    padding: 1rem;
+}
+
+.trashcanContainer {
+    border-radius: 1rem;
+    position: absolute;
+    bottom: 0;
+    height: 10rem;
+    width: 100%;
+    visibility: hidden;
+    
+    .trashcan {
+        position: absolute;
+        bottom: 0;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        left: 0;
+        right: 0;
+        margin: 0 auto;
+        background-color: unset;
+        border: .4rem solid #a9a9a9;
+        border-radius: 50%;
+        height: 5rem;
+        width: 5rem;
+        opacity: 0;
+        transition: 0.2s;
+    }
+
+    &.visible {
+        visibility: visible;
+        .trashcan {
+            bottom: 2rem;
+            opacity: 100;
+        }
+    }
+
+    &.hovered {
+        background-color: rgba(251, 141, 141, 0.5);
+    }
+}

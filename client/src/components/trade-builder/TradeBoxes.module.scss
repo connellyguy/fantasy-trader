@@ -1,0 +1,31 @@
+@import 'styles/variables.scss';
+
+.tradeBoxes {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.mobileTradeBoxes {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+// desktop
+@media screen and (min-width: $mobile-break-point) {
+    .mobileTradeBoxes {
+        display: none;
+    }
+}
+
+//mobile
+@media screen and (max-width: calc(#{$mobile-break-point} - 1px)) {
+    .tradeBoxes {
+        display: none;
+    }
+}

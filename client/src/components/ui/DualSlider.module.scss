@@ -1,0 +1,41 @@
+.container {
+    display: flex;
+    width: 100%
+}
+
+.inputContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    & > span {
+        font-size: 1.5rem;
+        width: 100%;
+        text-align: center;
+    }
+}
+
+.input {
+    border: 0;
+    font-size: 2rem;
+    outline: 0;
+    background: transparent;
+    border-bottom: 2px solid #ccc;
+    text-align: center;
+    width: 5rem;
+
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    -moz-appearance: textfield;
+}
+
+.minInput {
+    margin-right: 2rem;
+}
+
+.maxInput {
+    margin-left: 2rem;
+}
