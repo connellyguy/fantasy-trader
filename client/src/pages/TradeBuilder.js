@@ -10,8 +10,6 @@ function TradeBuilderPage() {
     const [loadingPlayers, setLoadingPlayers] = useState(true);
     const playerList = Object.values(playerMap);
 
-    console.log('playerMap: ', playerMap);
-
     useEffect(() => {
         axios({
             url: '/api/v1/players',
@@ -20,7 +18,12 @@ function TradeBuilderPage() {
             },
         })
             .then((resp) => {
-                setPlayerMap(get(resp, 'data', {}));
+                const retrievedPlayers = get(resp, 'data', {});
+                Object.values(retrievedPlayers).forEach((player) => {
+                    player.value = get(player, 'values.ppr', '0.0');
+                });
+                setPlayerMap(retrievedPlayers);
+                console.log('playerMap: ', playerMap);
                 setLoadingPlayers(false);
             })
             .catch((err) => {
