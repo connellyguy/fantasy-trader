@@ -1,5 +1,45 @@
+@import 'styles/variables.scss';
+
+.layout {
+    display: flex;
+    flex-wrap: nowrap;
+    height: 100vh;
+    justify-content: flex-start;
+}
+
 .main {
+    box-sizing: content-box;
     display: flex;
     justify-content: center;
-    max-width: 100%;
+    flex-grow: 1;
+    max-width: calc(100% - 15rem);
+    overflow-y: auto;
+    padding: 1rem 1rem 0;
+    z-index: 1;
+}
+
+.fade {
+    content: '';
+    top: 0;
+    height: 30px;
+    width: 100%;
+    background: linear-gradient(to bottom, rgba(251, 251, 251, 1) 0%, rgba(251, 251, 251, 0) 100%);
+    position: absolute;
+    z-index: 1;
+}
+
+//mobile
+@media screen and (max-width: calc(#{$mobile-break-point} - 1px)) {
+    .layout {
+        flex-direction: column;
+    }
+
+    .main {
+        padding: 2rem 0 0;
+        max-width: 100%;
+    }
+
+    .fade{
+        top: 10rem;
+    }
 }

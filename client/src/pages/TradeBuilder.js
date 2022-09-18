@@ -1,14 +1,38 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { get } from 'lodash';
+import { cloneDeep, get } from 'lodash';
 import PlayerSourceBox from 'components/trade-builder/PlayerSourceBox';
 import classes from './TradeBuilder.module.scss';
 import TradeBoxes from 'components/trade-builder/TradeBoxes';
+import { useSelector } from 'react-redux';
 
 function TradeBuilderPage() {
     const [playerMap, setPlayerMap] = useState({});
+    const [playerList, setPlayerList] = useState([]);
     const [loadingPlayers, setLoadingPlayers] = useState(true);
-    const playerList = Object.values(playerMap);
+    const scoringKey = useSelector((state) => state.scoringKey.value);
+
+    function computePlayerValue(origPlayers, valueKey) {
+        const newPlayers = Object.keys(origPlayers).reduce((players, playerId) => {
+            const player = cloneDeep(origPlayers[playerId]);
+            player.value = get(player, `values.${valueKey}`, '0.0');
+            return { ...players, [playerId]: player };
+        }, {});
+        return newPlayers;
+    }
+
+    useEffect(() => {
+        setPlayerMap(computePlayerValue(playerMap, scoringKey));
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [scoringKey]);
+
+    useEffect(() => {
+        setPlayerList(
+            Object.values(playerMap).sort((a, b) => {
+                return b.value - a.value;
+            })
+        );
+    }, [playerMap]);
 
     useEffect(() => {
         axios({
@@ -19,17 +43,14 @@ function TradeBuilderPage() {
         })
             .then((resp) => {
                 const retrievedPlayers = get(resp, 'data', {});
-                Object.values(retrievedPlayers).forEach((player) => {
-                    player.value = get(player, 'values.ppr', '0.0');
-                });
-                setPlayerMap(retrievedPlayers);
-                console.log('playerMap: ', playerMap);
+                setPlayerMap(computePlayerValue(retrievedPlayers, scoringKey));
                 setLoadingPlayers(false);
             })
             .catch((err) => {
                 console.error(err);
                 setLoadingPlayers(false);
             });
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     return (

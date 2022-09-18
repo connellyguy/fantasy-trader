@@ -1,0 +1,55 @@
+.select {
+    position: relative;
+
+    & > select {
+        // A reset of styles, including removing the default dropdown arrow
+        appearance: none;
+        // Additional resets for further consistency
+        background-color: transparent;
+        color: white;
+        border: none;
+        padding: 0 1em 0 0;
+        margin: 0;
+        width: 100%;
+        font-family: inherit;
+        font-size: 2rem;
+        font-weight: 600;
+        cursor: pointer;
+        line-height: inherit;
+        padding: 1rem 2rem 1rem .5rem;
+        border-bottom: 1px solid white;
+        margin-bottom: 1px;
+
+        &:hover {
+            border-bottom: 2px solid white;
+            margin-bottom: 0;
+        }
+
+        &:focus + .arrowWrapper .arrow {
+            transform: scale(-1);
+        }
+    }
+
+}
+
+.arrowWrapper {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    pointer-events: none;
+}
+
+.arrow {
+    content: '';
+    width: 0; 
+    height: 0; 
+    border-left: .5rem solid transparent;
+    border-right: .5rem solid transparent;
+    border-top: .75rem solid white;
+    transition: .3s;
+}

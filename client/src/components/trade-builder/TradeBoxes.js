@@ -118,6 +118,7 @@ function TradeBoxes(props) {
                     onTrash={(player) => handleTrash(0, player)}
                     onNameChange={(name) => handleNameChange(0, name)}
                     width={29}
+                    height={35}
                     team={teams[0]}
                 />
                 <TradeEvaluator teams={teams} />
@@ -126,6 +127,7 @@ function TradeBoxes(props) {
                     onTrash={(player) => handleTrash(1, player)}
                     onNameChange={(name) => handleNameChange(1, name)}
                     width={29}
+                    height={35}
                     team={teams[1]}
                 />
             </div>

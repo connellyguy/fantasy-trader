@@ -37,20 +37,15 @@ function PlayerSourceBox(props) {
 
     useEffect(() => {
         const allPositionsOff = Object.values(positionsFilter).every((position) => !position);
-        var filteredPlayers = players
-            .filter((player) => {
-                const value = get(player, 'value', 0);
-                const [min, max] = debouncedValueFilter;
-                return (
-                    (allPositionsOff ||
-                        positionsFilter[get(player, 'position', '').toLowerCase()]) &&
-                    value >= min &&
-                    value <= max
-                );
-            })
-            .sort((a, b) => {
-                return b.value - a.value;
-            });
+        var filteredPlayers = players.filter((player) => {
+            const value = get(player, 'value', 0);
+            const [min, max] = debouncedValueFilter;
+            return (
+                (allPositionsOff || positionsFilter[get(player, 'position', '').toLowerCase()]) &&
+                value >= min &&
+                value <= max
+            );
+        });
 
         if (searchTerm && filteredPlayers.length) {
             const searcher = new FuzzySearch(filteredPlayers, ['name'], {
@@ -114,16 +109,12 @@ function PlayerSourceBox(props) {
                             step={0.5}
                         />
                     </div>
-                    <div className={classes.ruleSelect}></div>
                 </div>
             </Card>
             <Card
                 isLoading={loadingPlayers}
-                header={
-                    <span className={classes.sourceBoxTitle}>
-                        Available Players ({availablePlayers.length})
-                    </span>
-                }>
+                header={`Available Players (${availablePlayers.length})`}
+                collapsible>
                 <PlayerCardContainer
                     showPlaceholder={false}
                     width="160rem"

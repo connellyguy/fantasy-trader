@@ -13,12 +13,14 @@ function DualSlider(props) {
     const [visualMin, setVisualMin] = useState(min - 4);
 
     function changeMin(value) {
-        const val = parseFloat(value);
-        return [Math.max(val, min), values[1]];
+        const numValue = parseFloat(value);
+        const noSwapValue = Math.min(numValue, values[1]);
+        return Math.max(noSwapValue, min);
     }
     function changeMax(value) {
-        const val = parseFloat(value);
-        return [values[0], Math.min(val, max)];
+        const numValue = parseFloat(value);
+        const noSwapValue = Math.max(numValue, values[0]);
+        return Math.min(noSwapValue, max);
     }
 
     useEffect(() => {
@@ -37,9 +39,9 @@ function DualSlider(props) {
         }
 
         if (thumb === 0) {
-            newValue = [Math.max(newValue[0], min), newValue[1]];
+            newValue = [changeMin(newValue[0]), newValue[1]];
         } else {
-            newValue = [newValue[0], Math.min(newValue[1], max)];
+            newValue = [newValue[0], changeMax([newValue[1]])];
         }
         onChange(e, newValue, thumb);
     }
@@ -52,9 +54,11 @@ function DualSlider(props) {
                 <input
                     className={classes.input}
                     type="number"
-                    onChange={setMinInput}
-                    onBlur={(e) => onChange(e, changeMin(minInput), 0)}
-                    value={values[0]}
+                    onChange={(e) => {
+                        setMinInput(e.target.value);
+                    }}
+                    onBlur={(e) => handleChange(e, [minInput, values[1]], 0)}
+                    value={minInput}
                     min={min}
                     max={values[1]}
                     step={step}
@@ -90,9 +94,11 @@ function DualSlider(props) {
                 <input
                     className={classes.input}
                     type="number"
-                    onChange={setMaxInput}
-                    onBlur={(e) => onChange(e, changeMax(maxInput), 1)}
-                    value={values[1]}
+                    onChange={(e) => {
+                        setMaxInput(e.target.value);
+                    }}
+                    onBlur={(e) => onChange(e, [values[0], maxInput], 1)}
+                    value={maxInput}
                     min={values[0]}
                     max={max}
                     step={step}

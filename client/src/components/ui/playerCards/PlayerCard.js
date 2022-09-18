@@ -27,6 +27,7 @@ function PlayerCard(props) {
         <div>
             <div
                 className={`${classes.card} ${classes[positionBorder]} 
+                    ${classes.noSelect} 
                     ${!placeholder ? classes.grabbable : ''} 
                     ${placeholder ? classes.placeholder : ''}`}
                 ref={drag}

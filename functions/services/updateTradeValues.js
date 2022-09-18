@@ -5,19 +5,29 @@ const { updateTable } = require('../firebase-api/realtime-database');
 
 async function getTradeValues(auth) {
     const sheets = google.sheets({ version: 'v4', auth });
-    const res = await sheets.spreadsheets.values.get({
-        spreadsheetId: '1k8_RX8VEwlV4L9SIERrcrS5iGUkMsM-3ekYf7vqVrBM',
-        range: '1 QB 1.0 PPR 4 PT!B5:M154',
+    const scoringKeys = {
+        ppr: '1.0 PPR',
+        'half-ppr': '0.5 PPR',
+        std: 'STD',
+    };
+
+    const valueRows = {};
+
+    const valueRequests = Object.keys(scoringKeys).map(async (key) => {
+        const res = await sheets.spreadsheets.values.get({
+            spreadsheetId: '1k8_RX8VEwlV4L9SIERrcrS5iGUkMsM-3ekYf7vqVrBM',
+            range: `1 QB ${scoringKeys[key]} 4 PT!B5:M154`,
+        });
+
+        valueRows[key] = res.data.values;
+        if (!valueRows[key] || valueRows[key].length === 0) {
+            console.error(`No data found for scoring key: ${key}`);
+        }
     });
-    const rows = res.data.values;
-    if (!rows || rows.length === 0) {
-        console.log('No data found.');
-        return;
-    }
+
+    await Promise.all(valueRequests);
 
     const players = {};
-    const tiers = {};
-    const positions = {};
 
     const positionByColumn = {
         2: 'RB',
@@ -26,49 +36,51 @@ async function getTradeValues(auth) {
         8: 'QB',
     };
 
-    const rowPromises = rows.map(async (row) => {
-        if (!row[0]) return;
+    const keyPromises = Object.keys(valueRows).map(async (scoringKey) => {
+        const rows = valueRows[scoringKey];
+        const rowPromises = rows.map(async (row) => {
+            if (!row[0]) return;
 
-        for (const column of [2, 4, 6, 8]) {
-            const name = row[column];
-            if (name) {
-                const playerInfo = await getPlayerInfo(name);
+            for (const column of [2, 4, 6, 8]) {
+                const name = row[column];
+                if (name) {
+                    const playerInfo = await getPlayerInfo(name);
 
-                if (playerInfo) {
-                    const tier = row[0];
-                    const position = positionByColumn[column];
-
-                    tiers[tier] = tiers[tier] || [];
-                    tiers[tier].push(playerInfo.id);
-
-                    positions[position] = positions[position] || [];
-                    positions[position].push(playerInfo.id);
-
-                    players[playerInfo.id] = {
-                        name,
-                        position: positionByColumn[column],
-                        tier: row[0],
-                        value: row[1],
-                        trend: row[column + 1],
-                        ...playerInfo,
-                    };
-                } else {
-                    console.log('PLAYER NOT FOUND: ', name);
+                    if (playerInfo) {
+                        const existingPlayer = players[playerInfo.id];
+                        if (existingPlayer) {
+                            existingPlayer.values[scoringKey] = row[1];
+                        } else {
+                            players[playerInfo.id] = {
+                                name,
+                                position: positionByColumn[column],
+                                tier: row[0],
+                                values: {
+                                    [scoringKey]: row[1],
+                                },
+                                trend: row[column + 1],
+                                ...playerInfo,
+                            };
+                        }
+                    } else {
+                        console.log('PLAYER NOT FOUND: ', name);
+                    }
                 }
             }
-        }
+        });
+
+        await Promise.all(rowPromises);
     });
 
-    await Promise.all(rowPromises);
+    await Promise.all(keyPromises);
+
     console.log(`Processed ${Object.keys(players).length} players`);
-    return { players, tiers, positions };
+    return { players };
 }
 
 async function updateTradeValues() {
     const tradeValues = await authorize().then(getTradeValues);
     await updateTable('players', tradeValues.players);
-    await updateTable('tiers', tradeValues.tiers);
-    await updateTable('positions', tradeValues.positions);
 }
 
 function handler() {

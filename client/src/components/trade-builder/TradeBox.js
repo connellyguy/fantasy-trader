@@ -24,7 +24,7 @@ function TradeBox(props) {
         <Card
             className={classes['trade-box']}
             header={
-                <div style={{ width: `${width - 3}rem` }}>
+                <div style={{ width: `${width - 3}rem`, paddingBottom: '1.5rem' }}>
                     <EditableText
                         value={tmpName}
                         onChange={(e) => {

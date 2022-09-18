@@ -23,9 +23,10 @@
     border-radius: 1rem;
     position: absolute;
     bottom: 0;
-    height: 10rem;
+    height: 0;
     width: 100%;
     visibility: hidden;
+    transition: height .1s;
     
     .trashcan {
         position: absolute;
@@ -43,11 +44,13 @@
         height: 5rem;
         width: 5rem;
         opacity: 0;
+        transition-delay: .2s;
         transition: 0.2s;
     }
 
     &.visible {
         visibility: visible;
+        height: 10rem;
         .trashcan {
             bottom: 2rem;
             opacity: 100;
