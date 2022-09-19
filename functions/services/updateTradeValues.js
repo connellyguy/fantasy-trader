@@ -1,7 +1,7 @@
 const { google } = require('googleapis');
 const { authorize } = require('../google-api/authorize');
-const { getPlayerInfo } = require('../espn-api/getPlayerInfo');
-const { updateTable } = require('../firebase-api/realtime-database');
+const { getPlayerInfo, getPlayerList } = require('../espn-api/getPlayerInfo');
+const { updateTable, readTable } = require('../firebase-api/realtime-database');
 
 async function getTradeValues(auth) {
     const sheets = google.sheets({ version: 'v4', auth });
@@ -13,9 +13,11 @@ async function getTradeValues(auth) {
 
     const valueRows = {};
 
+    const { spreadsheetId = '' } = await readTable('tradeValuesSheet');
+
     const valueRequests = Object.keys(scoringKeys).map(async (key) => {
         const res = await sheets.spreadsheets.values.get({
-            spreadsheetId: '1k8_RX8VEwlV4L9SIERrcrS5iGUkMsM-3ekYf7vqVrBM',
+            spreadsheetId,
             range: `1 QB ${scoringKeys[key]} 4 PT!B5:M154`,
         });
 
@@ -73,6 +75,15 @@ async function getTradeValues(auth) {
     });
 
     await Promise.all(keyPromises);
+
+    const { players: espnPlayers } = await getPlayerList();
+    const player = espnPlayers[0];
+    console.log('player: ', player);
+    // espnPlayers.forEach((bigPlayer) => {
+    //     const { player } = bigPlayer;
+    //     console.log('player: ', player);
+    //     return player;
+    // });
 
     console.log(`Processed ${Object.keys(players).length} players`);
     return { players };

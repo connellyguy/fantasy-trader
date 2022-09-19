@@ -29,7 +29,7 @@ function MainNavigation() {
             <div className={classes.leftAlign}>
                 <Link to="/" className={classes.logo}>
                     <img alt="football logo" src="/img/football-icon.png" />
-                    FFMarket
+                    FF DATA
                 </Link>
                 <nav className={classes.navLinks}>
                     {navLinks.map((navLink) => {
