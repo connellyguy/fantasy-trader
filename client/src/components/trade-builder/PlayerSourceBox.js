@@ -82,7 +82,6 @@ function PlayerSourceBox(props) {
                                 <PositionColor key={pos} position={pos}>
                                     <Switch
                                         onChange={(e) => {
-                                            console.log(`${pos}: `, e);
                                             positionsFilterChange(pos);
                                         }}
                                         label={pos.toUpperCase()}
@@ -117,6 +116,7 @@ function PlayerSourceBox(props) {
                 collapsible>
                 <PlayerCardContainer
                     showPlaceholder={false}
+                    height="37rem"
                     width="160rem"
                     players={availablePlayers}
                 />

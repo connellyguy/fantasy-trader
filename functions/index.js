@@ -11,4 +11,9 @@ exports.scheduledFunctionCrontab = functions.pubsub
     .timeZone('America/New_York')
     .onRun(updateTradeValues.handler);
 
+exports.scheduledFunctionCrontab = functions.pubsub
+    .schedule('0 7 * * 3')
+    .timeZone('America/New_York')
+    .onRun(updateTradeValues.handler);
+
 exports.app = functions.https.onRequest(app);

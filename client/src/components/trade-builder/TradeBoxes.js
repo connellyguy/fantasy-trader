@@ -81,7 +81,6 @@ function TradeBoxes(props) {
     }, [teams]);
 
     function handleDrop(index, player) {
-        console.log(`add ${player.name} to ${index}`);
         const team = teams[index];
         const playerId = player.id;
         // remove player from other team if added previously
@@ -95,7 +94,6 @@ function TradeBoxes(props) {
     }
 
     function handleTrash(index, player) {
-        console.log(`delete ${player.name} from ${index}`);
         const team = teams[index];
         const playerId = player.id;
         delete team.players[playerId];
@@ -118,7 +116,7 @@ function TradeBoxes(props) {
                     onTrash={(player) => handleTrash(0, player)}
                     onNameChange={(name) => handleNameChange(0, name)}
                     width={29}
-                    height={35}
+                    height={33}
                     team={teams[0]}
                 />
                 <TradeEvaluator teams={teams} />
@@ -127,7 +125,7 @@ function TradeBoxes(props) {
                     onTrash={(player) => handleTrash(1, player)}
                     onNameChange={(name) => handleNameChange(1, name)}
                     width={29}
-                    height={35}
+                    height={33}
                     team={teams[1]}
                 />
             </div>

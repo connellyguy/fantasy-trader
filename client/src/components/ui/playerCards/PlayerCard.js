@@ -1,5 +1,7 @@
+import { useEffect } from 'react';
 import classes from './PlayerCard.module.scss';
 import { useDrag } from 'react-dnd';
+import { getEmptyImage } from 'react-dnd-html5-backend';
 import { get } from 'lodash';
 import { ITEMTYPES } from 'constants/item-types';
 import React from 'react';
@@ -13,7 +15,7 @@ function PlayerCard(props) {
     const lastName = name.split(' ').slice(1).join(' ');
     const positionBorder = `border-${(player.position || '').toLowerCase()}`;
 
-    const [{ isDragging }, drag] = useDrag(() => ({
+    const [{ isDragging }, drag, preview] = useDrag(() => ({
         type: ITEMTYPES.playerCard,
         canDrag: !placeholder,
         item: player,
@@ -22,6 +24,11 @@ function PlayerCard(props) {
         }),
     }));
     const opacity = isDragging ? 0.4 : 1;
+
+    useEffect(() => {
+        preview(getEmptyImage(), { captureDraggingState: true });
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     return (
         <div>

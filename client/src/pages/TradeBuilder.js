@@ -5,6 +5,7 @@ import PlayerSourceBox from 'components/trade-builder/PlayerSourceBox';
 import classes from './TradeBuilder.module.scss';
 import TradeBoxes from 'components/trade-builder/TradeBoxes';
 import { useSelector } from 'react-redux';
+import DragPreviewLayer from 'components/ui/DragPreviewLayer';
 
 function TradeBuilderPage() {
     const [playerMap, setPlayerMap] = useState({});
@@ -57,6 +58,7 @@ function TradeBuilderPage() {
         <section className={classes.section}>
             <PlayerSourceBox players={playerList} loadingPlayers={loadingPlayers} />
             <TradeBoxes fullPlayerMap={playerMap} />
+            <DragPreviewLayer />
         </section>
     );
 }
