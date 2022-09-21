@@ -11,7 +11,7 @@ function TradeBuilderPage() {
     const [playerMap, setPlayerMap] = useState({});
     const [playerList, setPlayerList] = useState([]);
     const [loadingPlayers, setLoadingPlayers] = useState(true);
-    const scoringKey = useSelector((state) => state.scoringKey.value);
+    const scoringKey = useSelector((state) => state.players.scoringKey);
 
     function computePlayerValue(origPlayers, valueKey) {
         const newPlayers = Object.keys(origPlayers).reduce((players, playerId) => {

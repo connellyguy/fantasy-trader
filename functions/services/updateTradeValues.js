@@ -76,9 +76,9 @@ async function getTradeValues(auth) {
 
     await Promise.all(keyPromises);
 
-    const { players: espnPlayers } = await getPlayerList();
-    const player = espnPlayers[0];
-    console.log('player: ', player);
+    // const { players: espnPlayers } = await getPlayerList();
+    // const player = espnPlayers[0];
+    // console.log('player: ', player);
     // espnPlayers.forEach((bigPlayer) => {
     //     const { player } = bigPlayer;
     //     console.log('player: ', player);
@@ -95,7 +95,7 @@ async function updateTradeValues() {
 }
 
 function handler() {
-    updateTradeValues().catch((error) => {
+    return updateTradeValues().catch((error) => {
         console.error(error);
     });
 }

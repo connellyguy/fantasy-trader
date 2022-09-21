@@ -3,12 +3,12 @@ import { Link, useLocation } from 'react-router-dom';
 import classes from './MainNavigation.module.scss';
 import { SCORING_KEYS } from 'constants/scoring-keys';
 import { useSelector, useDispatch } from 'react-redux';
-import { setValue } from 'store/scoringKey';
+import { setScoringKey } from 'store/players';
 
 function MainNavigation() {
     const location = useLocation();
     const path = location.pathname;
-    const scoringKey = useSelector((state) => state.scoringKey.value);
+    const scoringKey = useSelector((state) => state.players.scoringKey);
     const dispatch = useDispatch();
 
     const navLinks = [
@@ -49,7 +49,7 @@ function MainNavigation() {
                     options={SCORING_KEYS}
                     value={scoringKey}
                     onNewValue={(value) => {
-                        dispatch(setValue(value));
+                        dispatch(setScoringKey(value));
                     }}
                 />
             </div>

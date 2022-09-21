@@ -15,14 +15,17 @@ function PlayerCard(props) {
     const lastName = name.split(' ').slice(1).join(' ');
     const positionBorder = `border-${(player.position || '').toLowerCase()}`;
 
-    const [{ isDragging }, drag, preview] = useDrag(() => ({
-        type: ITEMTYPES.playerCard,
-        canDrag: !placeholder,
-        item: player,
-        collect: (monitor) => ({
-            isDragging: monitor.isDragging(),
+    const [{ isDragging }, drag, preview] = useDrag(
+        () => ({
+            type: ITEMTYPES.playerCard,
+            canDrag: !placeholder,
+            item: player,
+            collect: (monitor) => ({
+                isDragging: monitor.isDragging(),
+            }),
         }),
-    }));
+        [player]
+    );
     const opacity = isDragging ? 0.4 : 1;
 
     useEffect(() => {

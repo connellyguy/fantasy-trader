@@ -19,8 +19,8 @@ function About() {
                     </p>
                     <p>
                         Developed using Node.js and React. Hosted via Firebase. Please contact{' '}
-                        <a href="https://www.reddit.com/user/ffdata_dev">ffdata_dev</a> on reddit
-                        for inquiries.
+                        <a href="https://www.reddit.com/user/connguy">connguy</a> on reddit for
+                        inquiries.
                     </p>
                 </section>
             </Card>

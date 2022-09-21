@@ -1,3 +1,5 @@
+@import 'styles/variables.scss';
+
 .header {
     display: flex;
     justify-content: center;
@@ -28,4 +30,11 @@
         font-size: 2rem;
     }
     width: 12rem;
+}
+
+//mobile
+@media screen and (max-width: calc(#{$mobile-break-point} - 1px)) { 
+    .slider {
+        width: 37rem;
+    }
 }

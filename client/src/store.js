@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
-import scoringKeyReducer from 'store/scoringKey';
+import playersReducer from 'store/players';
 
 function saveToLocalStorage(state) {
     try {
@@ -23,7 +23,7 @@ function loadFromLocalStorage() {
 
 const store = configureStore({
     reducer: {
-        scoringKey: scoringKeyReducer,
+        players: playersReducer,
     },
     preloadedState: loadFromLocalStorage(),
 });
