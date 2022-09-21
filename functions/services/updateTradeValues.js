@@ -1,6 +1,6 @@
 const { google } = require('googleapis');
 const { authorize } = require('../google-api/authorize');
-const { getPlayerInfo, getPlayerList } = require('../espn-api/getPlayerInfo');
+const { getPlayerInfo } = require('../espn-api/getPlayerInfo');
 const { updateTable, readTable } = require('../firebase-api/realtime-database');
 
 async function getTradeValues(auth) {

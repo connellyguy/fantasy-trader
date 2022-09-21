@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import TradeBox from './TradeBox';
 import classes from './TradeBoxes.module.scss';
-import { get, isEmpty } from 'lodash';
+import { get, isEmpty, cloneDeep } from 'lodash';
 import TradeEvaluator from './TradeEvaluator';
 import { POSITIONS } from 'constants/positions';
 
@@ -90,14 +90,14 @@ function TradeBoxes(props) {
             }
         });
         team.players[playerId] = player;
-        setTeams([...teams]);
+        setTeams(cloneDeep(teams));
     }
 
     function handleTrash(index, player) {
         const team = teams[index];
         const playerId = player.id;
         delete team.players[playerId];
-        setTeams([...teams]);
+        setTeams(cloneDeep(teams));
     }
 
     function handleNameChange(index, name) {
@@ -105,7 +105,15 @@ function TradeBoxes(props) {
         if (isEmpty(name)) name = `Team ${index + 1}`;
         team.name = name;
 
-        setTeams([...teams]);
+        setTeams(cloneDeep(teams));
+    }
+
+    function handleClear(index) {
+        console.log('handle clear: ', index);
+        const team = teams[index];
+        team.players = {};
+
+        setTeams(cloneDeep(teams));
     }
 
     return (
@@ -114,6 +122,9 @@ function TradeBoxes(props) {
                 <TradeBox
                     onDrop={(player) => handleDrop(0, player)}
                     onTrash={(player) => handleTrash(0, player)}
+                    onClear={() => {
+                        handleClear(0);
+                    }}
                     onNameChange={(name) => handleNameChange(0, name)}
                     width={29}
                     height={33}
@@ -123,6 +134,9 @@ function TradeBoxes(props) {
                 <TradeBox
                     onDrop={(player) => handleDrop(1, player)}
                     onTrash={(player) => handleTrash(1, player)}
+                    onClear={() => {
+                        handleClear(1);
+                    }}
                     onNameChange={(name) => handleNameChange(1, name)}
                     width={29}
                     height={33}
@@ -133,6 +147,9 @@ function TradeBoxes(props) {
                 <TradeBox
                     onDrop={(player) => handleDrop(0, player)}
                     onTrash={(player) => handleTrash(0, player)}
+                    onClear={() => {
+                        handleClear(0);
+                    }}
                     onNameChange={(name) => handleNameChange(0, name)}
                     width={18}
                     height={35}
@@ -141,6 +158,9 @@ function TradeBoxes(props) {
                 <TradeBox
                     onDrop={(player) => handleDrop(1, player)}
                     onTrash={(player) => handleTrash(1, player)}
+                    onClear={() => {
+                        handleClear(1);
+                    }}
                     onNameChange={(name) => handleNameChange(1, name)}
                     width={18}
                     height={35}

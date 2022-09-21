@@ -1,5 +1,58 @@
+@import 'styles/variables.scss';
+
+@keyframes shake {
+    0% { transform: translate(1px, 0); }
+    50% { transform: translate(-1px, 0); }
+    100% { transform: translate(1px, 0); }
+}
+
 .trade-box {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    gap: 5rem;
+}
+
+.trashcan {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+    min-width: 3rem;
+    
+}
+
+.trashcanIcon {
+    animation: shake 100ms 3;
+    animation-timing-function: linear; 
+    color: #a9a9a9;
+    cursor: pointer;
+    display: none;
+
+    &:hover {
+        color: #696969;
+    }
+}
+
+.visible {
+    display: block;
+}
+
+.editName {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex-grow: 1;
+}
+
+//mobile
+@media screen and (max-width: calc(#{$mobile-break-point} - 1px)) {
+    .header {
+        gap: 2rem;
+    }
 }

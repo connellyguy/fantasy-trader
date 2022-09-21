@@ -1,6 +1,6 @@
 import { useDragLayer } from 'react-dnd';
 import { ITEMTYPES } from 'constants/item-types';
-import PlayerCard from './playerCards/PlayerCard';
+import PlayerCard from '../trade-builder/playerCards/PlayerCard';
 
 const layerStyles = {
     position: 'fixed',

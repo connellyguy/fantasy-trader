@@ -31,7 +31,7 @@ function TradeEvaluator(props) {
         };
     });
 
-    function getValueDisplay({ isWinner, isLoser, value, diffs }) {
+    function GetValueDisplay({ isWinner, isLoser, value, diffs }) {
         return (
             <React.Fragment>
                 <div className={classes.row}>
@@ -89,11 +89,11 @@ function TradeEvaluator(props) {
                 <div className={`${classes.row} ${classes.valueRow}`}>
                     <div className={`${classes.column} ${classes.teamColumn}`}>
                         <div className={classes.teamName}>{teams[0].name}</div>
-                        {getValueDisplay(teamDiffs[0])}
+                        {GetValueDisplay(teamDiffs[0])}
                     </div>
                     <div className={`${classes.column} ${classes.teamColumn}`}>
                         <div className={classes.teamName}>{teams[1].name}</div>
-                        {getValueDisplay(teamDiffs[1])}
+                        {GetValueDisplay(teamDiffs[1])}
                     </div>
                 </div>
             </div>

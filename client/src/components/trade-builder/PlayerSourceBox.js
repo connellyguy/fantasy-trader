@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import PlayerCardContainer from 'components/ui/playerCards/PlayerCardContainer';
+import PlayerCardContainer from 'components/trade-builder/playerCards/PlayerCardContainer';
 import classes from './PlayerSourceBox.module.scss';
 import { POSITIONS } from '../../constants/positions';
 import { get } from 'lodash';

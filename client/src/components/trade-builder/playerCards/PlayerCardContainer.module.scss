@@ -1,3 +1,5 @@
+@import 'styles/variables.scss';
+
 .containerWrapper {
     position: relative;
     margin: 1rem;
@@ -13,6 +15,7 @@
     justify-content: center;
     flex-direction: row;
     flex-wrap: wrap;
+    gap: 1.5rem;
     height: calc(100% - 2rem);
     width: calc(100% - 2rem);
     overflow: auto;
@@ -59,5 +62,14 @@
 
     &.hovered {
         background-color: rgba(251, 141, 141, 0.5);
+    }
+}
+
+//mobile
+@media screen and (max-width: calc(#{$mobile-break-point} - 1px)) {
+    .container {
+        gap: 1rem;
+        padding: 1rem 2.5rem;
+        width: calc(100% - 5rem);
     }
 }
