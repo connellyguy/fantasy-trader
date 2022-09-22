@@ -94,6 +94,11 @@ $mobile-value-height: 3rem;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-size: 1.75rem;
     font-weight: 500;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: .75rem;
 }
 
 .firstName, .lastName, .teamName {
@@ -157,6 +162,12 @@ $mobile-value-height: 3rem;
     .valueColumn, .headshotColumn {
         display: none;
     }
+
+    .tradeValue {
+        flex-direction: row;
+        gap: 1rem;
+    }
+    
 }
 
 .placeholder {

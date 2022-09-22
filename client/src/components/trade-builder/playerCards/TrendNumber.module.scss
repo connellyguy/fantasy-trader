@@ -1,0 +1,20 @@
+@import 'styles/variables.scss';
+
+.row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: .25rem;
+    font-size: 1.25rem;
+}
+
+.positive {
+    color: $theme-olive;
+}
+
+.negative {
+    color: $theme-orange;
+    & > svg {
+        transform: scaleY(-1);
+    }
+}

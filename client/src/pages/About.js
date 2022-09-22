@@ -22,6 +22,19 @@ function About() {
                         <a href="https://www.reddit.com/user/connguy">connguy</a> on reddit for
                         inquiries.
                     </p>
+                    <h4>Art Credits</h4>
+                    <ul className={classes.artCreditsList}>
+                        <li>
+                            Trend by iconbysonny from{' '}
+                            <a
+                                href="https://thenounproject.com/browse/icons/term/trend/"
+                                target="_blank"
+                                title="trend Icons"
+                                rel="noreferrer">
+                                Noun Project
+                            </a>
+                        </li>
+                    </ul>
                 </section>
             </Card>
         </section>
