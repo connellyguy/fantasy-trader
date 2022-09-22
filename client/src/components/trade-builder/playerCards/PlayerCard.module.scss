@@ -82,12 +82,12 @@ $mobile-value-height: 3rem;
 
 .mobileValueContainer {
     display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
     height: 3rem;
     border-top: .25rem solid white;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
     flex-grow: 1;
+    padding-left: 1rem;
 }
 
 .tradeValue {
@@ -165,7 +165,8 @@ $mobile-value-height: 3rem;
 
     .tradeValue {
         flex-direction: row;
-        gap: 1rem;
+        justify-content: flex-start;
+        gap: .5rem;
     }
     
 }
