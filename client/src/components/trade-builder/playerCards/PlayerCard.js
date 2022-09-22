@@ -5,6 +5,7 @@ import { getEmptyImage } from 'react-dnd-html5-backend';
 import { get } from 'lodash';
 import { ITEMTYPES } from 'constants/item-types';
 import React from 'react';
+import TrendNumber from './TrendNumber';
 
 function PlayerCard(props) {
     const { player, placeholder = false } = props;
@@ -65,14 +66,20 @@ function PlayerCard(props) {
                             </div>
                             <div className={`${classes.column} ${classes.valueColumn}`}>
                                 <div className={classes.valueContainer}>
-                                    <span className={classes.tradeValue}>{player.value}</span>
+                                    <span className={classes.tradeValue}>
+                                        <span>{player.value}</span>
+                                        <TrendNumber value={player.trend} />
+                                    </span>
                                 </div>
                             </div>
                         </React.Fragment>
                     )}
                 </div>
                 <div className={`${classes.mobileValueContainer}`}>
-                    <span className={classes.tradeValue}>{player.value}</span>
+                    <span className={classes.tradeValue}>
+                        <span>{player.value}</span>
+                        <TrendNumber value={player.trend} />
+                    </span>
                 </div>
             </div>
         </div>
