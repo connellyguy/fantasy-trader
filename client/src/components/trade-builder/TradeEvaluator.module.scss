@@ -40,7 +40,9 @@
         font-size: 5rem;
     }
 
-    .bigValue {
+    .bigValueRow {
+        display: flex;
+        justify-content: center;
         font-size: 3rem;
     }
 

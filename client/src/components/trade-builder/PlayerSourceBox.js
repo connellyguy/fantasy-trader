@@ -38,7 +38,7 @@ function PlayerSourceBox(props) {
     useEffect(() => {
         const allPositionsOff = Object.values(positionsFilter).every((position) => !position);
         var filteredPlayers = players.filter((player) => {
-            const value = get(player, 'value', 0);
+            const value = parseFloat(get(player, 'value', 0));
             const [min, max] = debouncedValueFilter;
             return (
                 (allPositionsOff || positionsFilter[get(player, 'position', '').toLowerCase()]) &&

@@ -1,6 +1,8 @@
 import Card from 'components/ui/Card';
-import React from 'react';
+import React, { useRef, useReducer, useEffect, useState } from 'react';
 import classes from './TradeEvaluator.module.scss';
+import animateNumber from 'utils/animateNumber';
+import DiffNumber from './DiffNumber';
 
 function TradeEvaluator(props) {
     const { teams, height = '31rem', width = '40rem' } = props;
@@ -32,24 +34,35 @@ function TradeEvaluator(props) {
     });
 
     function GetValueDisplay({ isWinner, isLoser, value, diffs }) {
+        const totalRef = useRef(null);
+        const [displayTotal, setDisplayTotal] = useState(0);
+
+        function displayValuesReducer(state, action) {
+            switch (action.type) {
+                case 'update':
+                    animateNumber(setDisplayTotal, state.total, action.payload, 250);
+                    return { total: action.payload };
+                default:
+                    throw new Error();
+            }
+        }
+
+        const [, dispatchTotal] = useReducer(displayValuesReducer, { total: value.total });
+        useEffect(() => {
+            dispatchTotal({ type: 'update', payload: value.total });
+        }, [value]);
+
         return (
             <React.Fragment>
                 <div className={classes.row}>
-                    <div className={`${classes.teamValue}`}>{value.total}</div>
+                    <div ref={totalRef} className={`${classes.teamValue}`}>
+                        {displayTotal}
+                    </div>
                 </div>
                 {diffs.total !== 0 && (
-                    <React.Fragment>
-                        <div className={classes.row}>
-                            <div
-                                className={`${classes.bigValue} 
-                                ${isWinner ? classes.winner : ''} 
-                                ${isLoser ? classes.loser : ''}`}>
-                                {diffs.total > 0 ? `+${diffs.total}` : diffs.total}
-                            </div>
-                            {isWinner && <div className={classes.arrowUp} />}
-                            {isLoser && <div className={classes.arrowDown} />}
-                        </div>
-                    </React.Fragment>
+                    <div className={`${classes.bigValueRow} ${classes.row}`}>
+                        <DiffNumber size="big" value={diffs.total} />
+                    </div>
                 )}
                 <div className={classes.diffBreakdown}>
                     {Object.keys(diffs)
@@ -61,19 +74,7 @@ function TradeEvaluator(props) {
                                     className={`${classes.row} ${classes.smallValueRow}`}>
                                     <span style={{ fontWeight: '600' }}>{diff.toUpperCase()}:</span>
                                     <div className={classes.row}>
-                                        <span
-                                            className={`
-                                                ${diffs[diff] > 0 ? classes.winner : ''} 
-                                                ${diffs[diff] < 0 ? classes.loser : ''}`}>
-                                            {diffs[diff] > 0 && '+'}
-                                            {diffs[diff]}
-                                        </span>
-                                        {diffs[diff] > 0 && (
-                                            <i className={classes['arrowUp-small']} />
-                                        )}
-                                        {diffs[diff] < 0 && (
-                                            <i className={classes['arrowDown-small']} />
-                                        )}
+                                        <DiffNumber size="small" value={diffs[diff]} />
                                     </div>
                                 </div>
                             );

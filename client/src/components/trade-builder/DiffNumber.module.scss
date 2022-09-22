@@ -1,0 +1,50 @@
+@import 'styles/variables.scss';
+
+.row {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.winner {
+    color: $theme-olive;
+}
+
+.loser {
+    color: $theme-orange
+}
+
+.arrowUp {
+    margin-left: .5rem;
+    width: 0; 
+    height: 0; 
+    border-left: 1rem solid transparent;
+    border-right: 1rem solid transparent;
+    
+    border-bottom: 1.25rem solid $theme-olive;
+
+    &.small {
+        border-left-width: .5rem;
+        border-right-width: .5rem;
+        border-bottom-width: .75rem;
+    }
+}
+
+
+  
+.arrowDown {
+    margin-left: .5rem;
+    width: 0; 
+    height: 0; 
+    border-left: 1rem solid transparent;
+    border-right: 1rem solid transparent;
+    
+    border-top: 1.25rem solid $theme-orange;
+
+    &.small {
+        border-left-width: .5rem;
+        border-right-width: .5rem;
+        border-top-width: .75rem;
+    }
+}

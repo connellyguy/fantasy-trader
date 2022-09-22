@@ -57,7 +57,7 @@ function DualSlider(props) {
                     onChange={(e) => {
                         setMinInput(e.target.value);
                     }}
-                    onBlur={(e) => handleChange(e, [minInput, values[1]], 0)}
+                    onBlur={(e) => handleChange(e, [parseFloat(minInput || 0), values[1]], 0)}
                     value={minInput}
                     min={min}
                     max={values[1]}
@@ -97,7 +97,7 @@ function DualSlider(props) {
                     onChange={(e) => {
                         setMaxInput(e.target.value);
                     }}
-                    onBlur={(e) => onChange(e, [values[0], maxInput], 1)}
+                    onBlur={(e) => onChange(e, [values[0], parseFloat(maxInput || 0)], 1)}
                     value={maxInput}
                     min={values[0]}
                     max={max}

@@ -60,6 +60,7 @@
     ]
   },
   "devDependencies": {
+    "gzipper": "^7.1.0",
     "react-app-rewired": "^2.2.1"
   }
 }
