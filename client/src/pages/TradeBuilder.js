@@ -17,6 +17,7 @@ function TradeBuilderPage() {
         const newPlayers = Object.keys(origPlayers).reduce((players, playerId) => {
             const player = cloneDeep(origPlayers[playerId]);
             player.value = get(player, `values.${valueKey}`, '0.0');
+            player.trend = get(player, `trends.${valueKey}`, '0');
             return { ...players, [playerId]: player };
         }, {});
         return newPlayers;

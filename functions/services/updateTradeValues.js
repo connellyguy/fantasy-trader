@@ -52,6 +52,7 @@ async function getTradeValues(auth) {
                         const existingPlayer = players[playerInfo.id];
                         if (existingPlayer) {
                             existingPlayer.values[scoringKey] = row[1];
+                            existingPlayer.trends[scoringKey] = row[column + 1];
                         } else {
                             players[playerInfo.id] = {
                                 name,
@@ -60,7 +61,9 @@ async function getTradeValues(auth) {
                                 values: {
                                     [scoringKey]: row[1],
                                 },
-                                trend: row[column + 1],
+                                trends: {
+                                    [scoringKey]: row[column + 1],
+                                },
                                 ...playerInfo,
                             };
                         }
