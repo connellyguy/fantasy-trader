@@ -175,6 +175,7 @@ $mobile-value-height: 3rem;
     background-color: unset;
     border: .25rem dashed #c6c6c6;
     box-shadow: unset;
+    opacity: .7 !important;
 
     &:hover {
         box-shadow: unset;
@@ -190,7 +191,7 @@ $mobile-value-height: 3rem;
         text-align: center;
     }
 
-    .valueColumn, .headshotColumn {
+    .valueColumn, .headshotColumn, .mobileValueContainer {
         display: none;
     }
 }
