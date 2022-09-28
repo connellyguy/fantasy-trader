@@ -4,3 +4,17 @@
     max-width: 100%;
     width: $page-width;
 }
+
+.pageTitle {
+    font-size: 2rem;
+    padding: 1rem 0;
+
+    > * {
+        margin: 0;
+        text-align: center;
+    }
+
+    > h4 {
+        color: #808080;
+    }
+}

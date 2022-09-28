@@ -8,10 +8,7 @@ function About() {
                 <section className={classes.body}>
                     <p>
                         Trade value data is provided by{' '}
-                        <a href="https://www.reddit.com/user/PeakedInHighSkool">
-                            PeakedInHighSkool
-                        </a>{' '}
-                        via reddit. Support his{' '}
+                        <a href="https://peakedinhighskool.com/">PeakedInHighSkool</a>. Support his{' '}
                         <a href="https://www.patreon.com/Peakedinhighskool/posts">Patreon</a> for
                         advanced scoring settings and early access to data.
                         <br />

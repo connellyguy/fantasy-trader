@@ -167,6 +167,7 @@ function TradeBoxes(props) {
                     team={teams[1]}
                 />
                 <TradeEvaluator width="50rem" teams={teams} />
+                <div style={{ height: '15rem', width: '100vw' }} />
             </div>
         </React.Fragment>
     );

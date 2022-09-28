@@ -5,7 +5,7 @@ async function updateTable(tableName, jsonData) {
     const db = admin.database();
     console.log('pushing to table: ', tableName);
     const ref = db.ref(tableName);
-    ref.update(jsonData);
+    ref.set(jsonData);
 }
 
 async function readTable(tableName) {

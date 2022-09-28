@@ -13,7 +13,7 @@ function MainNavigation() {
 
     const navLinks = [
         {
-            label: 'Trade Evaluator',
+            label: 'Trade Calculator',
             path: '/trade-values',
         },
         {

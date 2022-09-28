@@ -6,6 +6,7 @@ import classes from './TradeBuilder.module.scss';
 import TradeBoxes from 'components/trade-builder/TradeBoxes';
 import { useSelector } from 'react-redux';
 import DragPreviewLayer from 'components/ui/DragPreviewLayer';
+import Card from 'components/ui/Card';
 
 function TradeBuilderPage() {
     const [playerMap, setPlayerMap] = useState({});
@@ -57,6 +58,17 @@ function TradeBuilderPage() {
 
     return (
         <section className={classes.section}>
+            <Card>
+                <div className={classes.pageTitle}>
+                    <h2>Market-Adjusted Trade Value Calculator</h2>
+                    <h4>
+                        Data provided by{' '}
+                        <a href="https://peakedinhighskool.com/" target="_blank" rel="noreferrer">
+                            PeakedInHighSkool
+                        </a>
+                    </h4>
+                </div>
+            </Card>
             <PlayerSourceBox players={playerList} loadingPlayers={loadingPlayers} />
             <TradeBoxes fullPlayerMap={playerMap} />
             <DragPreviewLayer />

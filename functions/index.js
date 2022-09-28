@@ -7,12 +7,7 @@ const updateTradeValues = require('./services/updateTradeValues');
 app.use('/api/v1', apiV1Router);
 
 exports.scheduledFunctionCrontab = functions.pubsub
-    .schedule('0 9 * * 3')
-    .timeZone('America/New_York')
-    .onRun(updateTradeValues.handler);
-
-exports.scheduledFunctionCrontab = functions.pubsub
-    .schedule('0 7 * * 3')
+    .schedule('20 12,7,8 * * wed')
     .timeZone('America/New_York')
     .onRun(updateTradeValues.handler);
 
