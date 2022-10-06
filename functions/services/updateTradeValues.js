@@ -79,6 +79,8 @@ async function getTradeValues(auth) {
 
     await Promise.all(keyPromises);
 
+    // WIP -- Pull all top 200 from ESPN and add to bottom of the list with 0.0 as value
+    // =====
     // const { players: espnPlayers } = await getPlayerList();
     // const player = espnPlayers[0];
     // console.log('player: ', player);
