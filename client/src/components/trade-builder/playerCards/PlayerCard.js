@@ -9,7 +9,7 @@ import TrendNumber from './TrendNumber';
 
 function PlayerCard(props) {
     const { player, placeholder = false } = props;
-    const name = get(player, 'name', '').toUpperCase();
+    const name = get(player, 'displayName', '').toUpperCase();
     const position = get(player, 'position', '');
     const teamAbbreviation = get(player, 'teamAbbreviation', '');
     const firstName = name.split(' ')[0];

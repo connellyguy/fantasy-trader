@@ -119,6 +119,7 @@ function PlayerSourceBox(props) {
                     height="37rem"
                     width="160rem"
                     players={availablePlayers}
+                    className={classes.cardContainer}
                 />
             </Card>
         </div>

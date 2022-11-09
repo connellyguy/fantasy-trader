@@ -13,6 +13,7 @@ function PlayerCardContainer(props) {
         height = '40rem',
         width = '80rem',
         showPlaceholder = true,
+        className = '',
     } = props;
 
     // eslint-disable-next-line no-unused-vars
@@ -49,7 +50,7 @@ function PlayerCardContainer(props) {
                 height,
                 width,
             }}
-            className={classes.containerWrapper}>
+            className={`${classes.containerWrapper} ${className}`}>
             <div ref={drop} className={classes.container}>
                 {showPlaceholder && !players.length && <PlayerCard player={{}} placeholder />}
                 {players.map((player) => {

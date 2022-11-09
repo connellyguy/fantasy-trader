@@ -32,6 +32,10 @@
     width: 12rem;
 }
 
+.cardContainer {
+    flex-grow: 1;
+}
+
 //mobile
 @media screen and (max-width: calc(#{$mobile-break-point} - 1px)) { 
     .slider {

@@ -1,6 +1,7 @@
 {
   "dependencies": {
-    "@google-cloud/local-auth": "^2.1.0"
+    "@google-cloud/local-auth": "^2.1.0",
+    "lodash": "^4.17.21"
   },
   "name": "fantasy-trader",
   "description": "A webapp for easy use of the reddit adjusted trade values sheet",

@@ -1,7 +1,9 @@
 const { google } = require('googleapis');
 const { authorize } = require('../google-api/authorize');
-const { getPlayerInfo } = require('../espn-api/getPlayerInfo');
+const { getPlayerInfo, getPlayerList } = require('../espn-api/getPlayerInfo');
 const { updateTable, readTable } = require('../firebase-api/realtime-database');
+const { get } = require('lodash');
+const FuzzySearch = require('fuzzy-search');
 
 async function getTradeValues(auth) {
     const sheets = google.sheets({ version: 'v4', auth });
@@ -38,6 +40,13 @@ async function getTradeValues(auth) {
         8: 'QB',
     };
 
+    const espnPlayerList = await getPlayerList(300);
+
+    const espnPlayerSearcher = new FuzzySearch(espnPlayerList, ['fullName'], {
+        caseSensitive: false,
+        sort: true,
+    });
+
     const keyPromises = Object.keys(valueRows).map(async (scoringKey) => {
         const rows = valueRows[scoringKey];
         const rowPromises = rows.map(async (row) => {
@@ -46,7 +55,19 @@ async function getTradeValues(auth) {
             for (const column of [2, 4, 6, 8]) {
                 const name = row[column];
                 if (name) {
-                    const playerInfo = await getPlayerInfo(name);
+                    let player = await espnPlayerSearcher.search(name);
+                    let playerId = get(player[0], 'id');
+                    if (!playerId) {
+                        let namesArray = name.split(' ');
+                        if (namesArray.length > 2) {
+                            let dropSuffix = namesArray.slice(0, 2).join(' ');
+                            player = await espnPlayerSearcher.search(dropSuffix);
+                            playerId = get(player[0], 'id');
+                        }
+                    }
+                    
+                    let playerInfo;
+                    if (playerId) playerInfo = await getPlayerInfo(playerId);
 
                     if (playerInfo) {
                         const existingPlayer = players[playerInfo.id];
@@ -79,17 +100,6 @@ async function getTradeValues(auth) {
 
     await Promise.all(keyPromises);
 
-    // WIP -- Pull all top 200 from ESPN and add to bottom of the list with 0.0 as value
-    // =====
-    // const { players: espnPlayers } = await getPlayerList();
-    // const player = espnPlayers[0];
-    // console.log('player: ', player);
-    // espnPlayers.forEach((bigPlayer) => {
-    //     const { player } = bigPlayer;
-    //     console.log('player: ', player);
-    //     return player;
-    // });
-
     console.log(`Processed ${Object.keys(players).length} players`);
     return { players };
 }
@@ -111,7 +121,7 @@ async function httpHandler(req, res) {
 
     updateTradeValues()
         .then(() => {
-            res.status(200).json({ msg: 'Update successful' });
+            res.status(200).json({msg: 'Update successful'});
         })
         .catch((error) => {
             console.error(error);

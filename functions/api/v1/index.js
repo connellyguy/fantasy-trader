@@ -9,6 +9,6 @@ router.get('/', (req, res) => {
 });
 
 router.get('/players', readPlayers);
-// router.get('/updateTradeValues', updateTradeValues.httpHandler);
+// router.post('/updateTradeValues', updateTradeValues.httpHandler);
 
 module.exports = router;
